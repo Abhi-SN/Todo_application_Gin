@@ -1,0 +1,48 @@
+
+
+version: '3.8'
+
+services:
+  # The backend API service
+  todo-api:
+    build: .
+    ports:
+      - "8083:8080"
+    # UPDATED: This service will now wait until the 'db' service is healthy.
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgres://myuser:mypassword@db:5432/mydb?sslmode=disable
+
+  # The PostgreSQL database service
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+
+      - "5432:5432"
+    # NEW: The healthcheck tells Docker to wait until Postgres is ready.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # The frontend service
+  frontend:
+    build: ./frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - todo-api
+
+# Define the volume 
+volumes:
+  postgres-data:
