@@ -1,63 +1,63 @@
-Full-Stack Todo List Application with Go and Gin
-This project is a complete full-stack CRUD (Create, Read, Update, Delete) application. The backend is a RESTful API built with the Gin web framework for Go, and the frontend is a simple, dynamic single-page application.
+# Full-Stack Todo List Application with Go and Gin
 
-The application uses a PostgreSQL database for persistent data storage, and all services are containerized with Docker.
+This repository contains a complete, full-stack CRUD (Create, Read, Update, Delete) Todo List application. The backend is a RESTful API built with the Gin framework in Go, and the frontend is a single-page application. All components are containerized using Docker, with PostgreSQL providing persistent data storage.
 
-Features
-Full CRUD Functionality: Create, read, update, and delete todo items.
+## ✨ Features
 
-RESTful API: A clean, predictable API built with Gin.
+- **Full CRUD Functionality:** Add, read, update, and delete todos.
+- **RESTful API:** Consistent, clean endpoints powered by Gin (Go).
+- **Persistent Storage:** PostgreSQL ensures data durability across restarts.
+- **Full-Stack UI:** Intuitive web interface for easy todo management.
+- **Containerized:** One-command startup using Docker Compose.
 
-Database Persistence: Data is stored in a PostgreSQL database and persists across application restarts.
+## 🗂 Directory Structure
 
-Full-Stack: Includes both a backend API and a frontend UI.
-
-Containerized: The entire application (API, database, frontend) is managed with Docker Compose for easy setup.
-
-Directory Structure
+```
 gin-todo-api/
 │
-├── 📂 frontend/
+├── frontend/
 │   ├── index.html
 │   └── Dockerfile
 │
-├── 📜 main.go
-├── 📜 Dockerfile
-└── 📜 docker-compose.yml
+├── main.go
+├── Dockerfile
+└── docker-compose.yml
+```
 
-Prerequisites
-Go: Version 1.22 or later.
+## 🚦 Prerequisites
 
-Docker & Docker Compose: For building and running the services.
+- **Go** (version 1.22 or later)
+- **Docker & Docker Compose**
 
-How to Run the Application
-Clone the repository and navigate to the project's root directory (gin-todo-api).
+## 🚀 How to Run the Application
 
-Install Go Dependencies: Run the following command in the root directory to download the necessary Go packages (Gin, CORS middleware, database driver).
+1. **Clone the repository**  
+   ```
+   git clone 
+   cd gin-todo-api
+   ```
 
-go mod tidy
+2. **Install Go dependencies**  
+   ```
+   go mod tidy
+   ```
 
-Build and Start Services: Use Docker Compose to build and run all the containers.
+3. **Build and launch all services**  
+   ```
+   docker-compose up --build
+   ```
+   This command starts the PostgreSQL database, the Gin API server, and the Nginx-based frontend.
 
-docker-compose up --build
+4. **Open your browser:**  
+   ```
+   http://localhost:3000
+   ```
 
-This will start the PostgreSQL database, the Gin API server, and the Nginx frontend server.
+## 🖥 How to Use
 
-Access the Application: Open your web browser and navigate to:
-http://localhost:3000
+- **Add a Todo:** Type a task and click "Add".
+- **Mark as Complete:** Click a todo’s text to toggle its completed status (crosses out when finished).
+- **Edit a Todo:** Click the "Edit" button, update the text, then press "Save".
+- **Delete a Todo:** Click the "×" icon to remove an item.
 
-How to Use
-The application is straightforward to use via the web interface.
-
-Add a Todo: Type a task into the input field and click "Add".
-
-Mark as Complete: Click on the text of a todo to toggle its completed status (it will be crossed out).
-
-Edit a Todo: Click the "Edit" button, change the text, and click "Save".
-
-Delete a Todo: Click the "×" button to remove a todo from the list.
-
-All changes are saved to the database and will be there if you refresh the page or restart the application.
-
-
-
+All your actions are synchronized with the database—refreshing the page or restarting the app will retain all completed, pending, or deleted todos.
